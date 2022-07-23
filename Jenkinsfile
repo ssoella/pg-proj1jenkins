@@ -26,7 +26,6 @@ pipeline {
       def scannerHome = tool "my_sonarqube";
       withSonarQubeEnv() {
         sh "${scannerHome}/bin/sonar-scanner"
-#		sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=pgp-project"
       }
     }
 	 
