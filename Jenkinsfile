@@ -3,6 +3,7 @@ pipeline {
   tools {
      maven "my_maven"
 	 buildInfo = Artifactory.newBuildInfo()
+	 
   }
 
   stages {
@@ -20,21 +21,16 @@ pipeline {
 		
 	}
 	
-	stage("SonarQube Analysis") {
-	  steps {
-	    script {
-	      def scannerHome = tool "my_sonarqube";
-		  withSonarQubeEnv("sonarqube") {
-            sh "${scannerHome}/bin/sonar-scanner"
-	        }	
-		}	
-      
-	 }
-	 
 	}
-
-}
-
+    stage("SonarQube Analysis") {
+ #    def mvn = tool 'Default Maven';
+      def scannerHome = tool "my_sonarqube";
+      withSonarQubeEnv() {
+        sh "${scannerHome}/bin/sonar-scanner"
+#		sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=pgp-project"
+      }
+    }
+	 
 }
 	
 
