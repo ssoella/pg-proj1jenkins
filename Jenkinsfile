@@ -22,7 +22,7 @@ pipeline {
 	
 	stage("SonarQube Analysis") {
 	   steps {
-	      scripts {
+	      script {
             scannerHome = tool "my_sonarqube";
 		  }
           withSonarQubeEnv("mysonarserver") {
