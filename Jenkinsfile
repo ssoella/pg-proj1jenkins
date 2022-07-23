@@ -23,7 +23,6 @@ pipeline {
 	
 	}
     stage("SonarQube Analysis") {
- #    def mvn = tool 'Default Maven';
       def scannerHome = tool "my_sonarqube";
       withSonarQubeEnv() {
         sh "${scannerHome}/bin/sonar-scanner"
