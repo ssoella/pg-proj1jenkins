@@ -2,7 +2,6 @@ pipeline {
   agent any
   tools {
      maven "my_maven"
-	 buildInfo = Artifactory.newBuildInfo()
 	 
   }
 
@@ -23,11 +22,13 @@ pipeline {
 	
 	}
     stage("SonarQube Analysis") {
-      def scannerHome = tool "my_sonarqube";
-      withSonarQubeEnv() {
-        sh "${scannerHome}/bin/sonar-scanner"
-      }
-    }
+	   steps {
+         def scannerHome = tool "my_sonarqube";
+         withSonarQubeEnv() {
+         sh "${scannerHome}/bin/sonar-scanner"
+         } 
+       }  
+	}
 	 
 }
 	
